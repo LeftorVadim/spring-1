@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>tasks</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Description</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tasks,number : ${task}">
+        <td th:text="${tasks.id}"/>
+        <td th:text="${tasks.description}" th:id="'description_' + ${tasks.id}"/>
+        <td th:text="${tasks.status}" th:id="'status_' + ${tasks.id}"/>
+        <td>
+            <form th:method="GET" th:action="@{/task/{id}/update(id=${tasks.getId()})}">
+                <input type="submit" value="Update"/>
+            </form>
+        </td>
+        <td>
+            <form th:method="DELETE" th:action="@{/task/{id}(id=${tasks.getId()})}">
+                <input type="submit" value="Delete"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h2>
+    <button th:each="pageNumber: ${pageNumbers}" class="button-page">
+        <a th:href="@{/task(page=${pageNumber}, pageSize=10)}" th:text="${pageNumber}"></a>
+    </button>
+</h2>
+<form action="/task/create" target="_blank">
+    <button>Create new task</button>
+</form>
+</body>
+</html>

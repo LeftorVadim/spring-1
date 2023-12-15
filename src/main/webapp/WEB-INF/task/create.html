@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/task}" th:object="${task}">
+  <label for="description">Enter description: </label>
+  <input type="text" th:field="*{description}" id="description"/>
+  <div style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</div>
+  <br/>
+  <label for="status">Select status: </label>
+  <select type="text" th:field="*{status}" id="status">
+    <option value='IN_PROGRESS'>IN_PROGRESS</option>
+    <option value='DONE'>DONE</option>
+    <option value='PAUSED'>PAUSED</option>
+  </select>
+  <br/>
+  <input type="submit" value="Create!"/>
+</form>
+</body>
+</html>
